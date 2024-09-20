@@ -1,0 +1,58 @@
+---
+# vars for ansible
+
+# Plugins
+# map_mitogen_ver: 0.2.9
+# map_mitogen_sha256: "sha256:76cb9afef92596818a4639afb2a0bb0384ce7b6699b353af55662057b08b1e57"
+#
+# map_vbotka_ver: 1.13.0
+# map_vbotka_sha256: "sha256:3fefa6c00b39f645f7ba449172264d79db44219b37686eb15cf7cd5aa002c963"
+#
+# ma_plugins:
+#   - archive: mitogen-{{ map_mitogen_ver }}.tar.gz
+#     archive_url: https://networkgenomics.com/try/mitogen-{{ map_mitogen_ver }}.tar.gz
+#     checksum: "{{ map_mitogen_sha256 }}"
+#     dest: mitogen-{{ map_mitogen_ver }}
+#     creates: "{{ ma_plugins_path }}/mitogen-{{ map_mitogen_ver }}"
+#     link: mitogen
+#     plugins:
+#       - path: mitogen/ansible_mitogen/plugins/strategy
+#         ini_key: strategy_plugins
+#         enable: true
+#   - archive: ansible-plugins-{{ map_vbotka_ver }}.tar.gz
+#     archive_url: https://github.com/vbotka/ansible-plugins/archive/{{ map_vbotka_ver }}.tar.gz
+#     checksum: "{{ map_vbotka_sha256 }}"
+#     dest: ansible-plugins-{{ map_vbotka_ver }}
+#     creates: "{{ ma_plugins_path }}/ansible-plugins-{{ map_vbotka_ver }}"
+#     link: ansible-plugins
+#     plugins:
+#       - path: ansible-plugins/filter_plugins/bool_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/datetime_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/dict_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/file_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/hash_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/list_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/version_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/filter_plugins/string_filters
+#         ini_key: filter_plugins
+#         enable: true
+#       - path: ansible-plugins/inventory_plugins/ip_based_groups
+#         ini_key: inventory_plugins
+#         enable: true
+
+# EOF
+...

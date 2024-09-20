@@ -1,0 +1,22 @@
+---
+
+- name: "Install: Copy {{ mg_binary }}"
+  ansible.builtin.copy:
+    src: "{{ mg_tmpdir }}/{{ mg_binary }}"
+    dest: "{{ mg_bindir }}"
+    mode: "0755"
+    remote_src: true
+  tags: mg_install_binary
+
+
+- name: "Install: Copy completions"
+  ansible.builtin.copy:
+    src: "{{ mg_tmpdir }}/completions/{{ item.key }}"
+    dest: "{{ item.value }}"
+    mode: "0644"
+    remote_src: true
+  loop: "{{ mg_completions[ansible_os_family] | dict2items }}"
+  when: ansible_os_family in mg_completions
+  tags: mg_install_completions
+
+# EOF

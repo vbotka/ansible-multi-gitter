@@ -1,0 +1,16 @@
+---
+
+- name: Get tags and set latest tag to mg_tag
+  when: mg_tag | d('latest', true) == 'latest'
+  block:
+
+    - name: "Vars: Get tags"
+      ansible.builtin.uri:
+        url: "{{ mg_github_tags }}"
+      register: _mg_repo_info
+
+    - name: "Vars: Set mg_tag"
+      ansible.builtin.set_fact:
+        mg_tag: "{{ _mg_repo_info.json.0.name }}"
+
+# EOF

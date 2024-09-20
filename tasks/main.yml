@@ -1,0 +1,21 @@
+---
+# tasks for multi-gitter
+
+- name: Import vars.yml
+  ansible.builtin.import_tasks: vars.yml
+  tags: always
+
+- name: Import debug.yml
+  ansible.builtin.import_tasks: debug.yml
+  when: mg_debug | bool
+  tags: mg_debug
+
+- name: Import source.yml
+  ansible.builtin.import_tasks: source.yml
+  tags: mg_source
+
+- name: Import install.yml
+  ansible.builtin.import_tasks: install.yml
+  tags: mg_install
+
+# EOF

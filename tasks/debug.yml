@@ -1,0 +1,48 @@
+---
+
+- name: "Debug: mg_debug={{ mg_debug | bool }}"
+  vars:
+    msg: |-
+      mg_role_version: {{ mg_role_version }}
+      ansible_architecture: {{ ansible_architecture }}
+      ansible_os_family: {{ ansible_os_family }}
+      ansible_distribution: {{ ansible_distribution }}
+      ansible_distribution_major_version: {{ ansible_distribution_major_version }}
+      ansible_distribution_version: {{ ansible_distribution_version }}
+      ansible_distribution_release: {{ ansible_distribution_release }}
+      ansible_python_version: {{ ansible_python_version }}
+
+      mg_backup_conf: {{ mg_backup_conf }}
+      mg_tmpdir: {{ mg_tmpdir }}
+
+      mg_bindir: {{ mg_bindir }}
+      mg_project_name: {{ mg_project_name }}
+
+      mg_os: {{ mg_os }}
+      mg_arch: {{ mg_arch }}
+      mg_platform: {{ mg_platform }}
+
+      mg_owner: {{ mg_owner }}
+      mg_repo: {{ mg_repo }}
+      mg_prefix: {{ mg_prefix }}
+      mg_github_tags: {{ mg_github_tags }}
+      mg_github_download: {{ mg_github_download }}
+
+      mg_tag: {{ mg_tag }}
+      mg_version: {{ mg_version | d(mg_tag[1:], true) }}
+      mg_binary: {{ mg_binary }}
+      mg_name: {{ mg_name }}
+      mg_format: {{ mg_format }}
+      mg_tarball: {{ mg_tarball }}
+      mg_file_url: {{ mg_file_url }}
+
+      mg_checksums: {{ mg_checksums }}
+      mg_checksums_hash: {{ mg_checksums_hash }}
+      mg_checksums_url: {{ mg_checksums_url }}
+
+      mg_completions:
+        {{ mg_completions | to_nice_yaml(indent=2) | indent(2) }}
+  ansible.builtin.debug:
+    msg: "{{ '{}'.format(msg) }}"
+
+# EOF

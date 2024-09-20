@@ -1,0 +1,36 @@
+---
+# default vars for multi-gitter
+mg_role_version: 1.0.0
+
+mg_debug: false
+mg_backup_conf: false
+mg_tmpdir: /tmp/ansible/multi-gitter
+
+mg_bindir: /usr/local/bin
+mg_project_name: multi-gitter
+
+mg_os: "{{ ansible_system }}"
+mg_arch: "{{ ansible_architecture }}"
+mg_platform: "{{ mg_os }}/{{ mg_arch }}"
+
+mg_owner: lindell
+mg_repo: multi-gitter
+mg_prefix: "{{ mg_owner }}/{{ mg_repo }}"
+mg_github_tags: "https://api.github.com/repos/{{ mg_prefix }}/tags"
+mg_github_download: "https://github.com/{{ mg_prefix }}/releases/download"
+
+mg_tag: ""
+mg_version: ""
+mg_binary: multi-gitter
+mg_name: "{{ mg_binary }}_{{ mg_version | d(mg_tag[1:], true) }}_{{ mg_os }}_{{ mg_arch }}"
+mg_format: tar.gz
+mg_tarball: "{{ mg_name }}.{{ mg_format }}"
+mg_file_url: "{{ mg_github_download }}/{{ mg_tag }}/{{ mg_tarball }}"
+
+mg_checksums: checksums.txt
+mg_checksums_hash: sha256
+mg_checksums_url: "{{ mg_github_download }}/{{ mg_tag }}/{{ mg_checksums }}"
+
+mg_completions:
+  Debian:
+    multi-gitter.bash: /etc/bash_completion.d/multi-gitter

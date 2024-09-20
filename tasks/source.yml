@@ -1,0 +1,49 @@
+---
+
+- name: "Source: Create directory {{ mg_tmpdir }}"
+  ansible.builtin.file:
+    state: directory
+    path: "{{ mg_tmpdir }}"
+    mode: "0775"
+  tags: mg_source_dir
+
+- name: Download tarball
+  tags: mg_source_download
+  block:
+
+    - name: "Source: Download {{ mg_checksums }}"
+      ansible.builtin.get_url:
+        url: "{{ mg_checksums_url }}"
+        dest: "{{ mg_tmpdir }}/{{ mg_checksums }}"
+        mode: "0644"
+
+    - name: "Source: Read {{ mg_checksums }}"
+      ansible.builtin.slurp:
+        src: "{{ mg_tmpdir }}/{{ mg_checksums }}"
+      register: _mg_checksums
+
+    - name: "Source: Set mg_checksums_dict"
+      ansible.builtin.set_fact:
+        mg_checksums_dict: "{{ dict(_mg_checksums.content | b64decode |
+	                       split('\n') | select |
+	                       map('split') | map('reverse')) }}"
+
+    - name: "Source: Debug mg_checksums_dict mg_debug={{ mg_debug }}"
+      ansible.builtin.debug:
+        var: mg_checksums_dict
+      when: mg_debug | d(false) | bool
+
+    - name: "Source: Download {{ mg_tarball }}"
+      ansible.builtin.get_url:
+        url: "{{ mg_file_url }}"
+        dest: "{{ mg_tmpdir }}/{{ mg_tarball }}"
+        mode: "0644"
+        checksum: "{{ mg_checksums_hash }}:{{ mg_checksums_dict[mg_tarball] }}"
+
+- name: "Source: Untar {{ mg_tarball }}"
+  ansible.builtin.unarchive:
+    src: "{{ mg_tmpdir }}/{{ mg_tarball }}"
+    dest: "{{ mg_tmpdir }}"
+  tags: mg_source_untar
+
+# EOF
