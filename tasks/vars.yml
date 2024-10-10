@@ -5,9 +5,9 @@
   block:
 
     - name: "Vars: Get tags"
+      register: _mg_repo_info
       ansible.builtin.uri:
         url: "{{ mg_github_tags }}"
-      register: _mg_repo_info
 
     - name: "Vars: Set mg_tag"
       ansible.builtin.set_fact:
