@@ -12,6 +12,8 @@
   block:
 
     - name: "Source: Download {{ mg_checksums }}"
+      environment:
+        CRYPTOGRAPHY_OPENSSL_NO_LEGACY: '1'
       ansible.builtin.get_url:
         url: "{{ mg_checksums_url }}"
         dest: "{{ mg_tmpdir }}/{{ mg_checksums }}"
