@@ -1,6 +1,6 @@
 ---
 # default vars for multi-gitter
-mg_role_version: 1.0.2
+mg_role_version: 1.0.3
 
 mg_debug: false
 mg_backup_conf: false
